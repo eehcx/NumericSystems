@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversor Decimal</title>
+    <link rel="icon" type="image/png" href="https://firebasestorage.googleapis.com/v0/b/nitro-restaurant.appspot.com/o/calculator%20(1).png?alt=media&token=dcb7fa48-5399-4922-b1c7-bd903e0af191">
+    <link rel="stylesheet" href="{% static '/css/form.css' %}">
+</head>
+<body>
+    <h1>Selecciona una Base</h1>
+
+    <form class="space-y-4" method="post">
+        {% csrf_token %}
+
+        <label for="number">Número</label>
+
+        <input type="number" name="number" id="number" required>
+        
+    
+        <label for="base">Base:</label>
+        <input type="checkbox" name="base" value="2"> Binario (Base 2)
+        <input type="checkbox" name="base" value="8"> Octal (Base 8)
+        <input type="checkbox" name="base" value="16"> Hexadecimal (Base 16)
+    
+        <button type="submit">Convertir</button>
+    </form>
+    
+
+    {% if results %}
+        <h2>Resultados:</h2>
+        <ul class="list">
+        {% for result in results %}
+            <li>{{ result }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+</body>
+</html>

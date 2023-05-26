@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Conversor Hexadecimal a Binario</title>
+    <link rel="icon" type="image/png" href="https://firebasestorage.googleapis.com/v0/b/nitro-restaurant.appspot.com/o/calculator%20(1).png?alt=media&token=dcb7fa48-5399-4922-b1c7-bd903e0af191">
+    <link rel="stylesheet" href="{% static '/css/form.css' %}">
+    <!--Jquery cdn-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Conversor Hexadecimal a Binario</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="number">Número Hexadecimal:</label>
+        <input type="text" name="number" id="number" required>
+    
+        <button type="submit">Convertir</button>
+    </form>
+
+    {% if result %}
+        <h2>Resultado:</h2>
+        <p>{{ result }}</p>
+    {% endif %}
+</body>
+
+<script>
+$(document).ready(function() {
+  $('#mi-input').on('input', function() {
+    var inputValue = $(this).val();
+    var regex = /^[0-9a-fA-F]+$/;
+    if (!regex.test(inputValue)) {
+      $(this).val('');
+    }
+  });
+});
+
+</script>
+
+</html>

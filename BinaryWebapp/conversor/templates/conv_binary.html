@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor Binario</title>
+    <link rel="stylesheet" href="{% static '/css/form.css' %}">
+</head>
+<body>
+    <h1>Conversor Binario a otras Bases</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <label for="number">Número binario:</label>
+        <input type="text" name="number" id="number" pattern="[01]*" required>
+        <br>
+        <label>Selecciona las bases:</label>
+        <input type="checkbox" name="base" value="octal"> Octal
+        <input type="checkbox" name="base" value="hexadecimal"> Hexadecimal
+        <input type="checkbox" name="base" value="decimal"> Decimal
+        <br>
+        <button type="submit">Convertir</button>
+    </form>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% else %}
+        {% if binary_number %}
+            <h2>Resultado:</h2>
+            <ul>
+                {% if 'octal' in bases %}
+                    <li>Octal: {{ octal_number }}</li>
+                {% endif %}
+                {% if 'hexadecimal' in bases %}
+                    <li>Hexadecimal: {{ hexadecimal_number }}</li>
+                {% endif %}
+                {% if 'decimal' in bases %}
+                    <li>Decimal: {{ decimal_number }}</li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
